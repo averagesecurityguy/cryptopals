@@ -44,19 +44,6 @@ func get_data(filename string) []byte {
     return ca.DecodeB64Str(buffer.String())
 }
 
-func chunk(data []byte, size int) [][]byte {
-    var chunks [][]byte
-
-    for i:=0; i<len(data)-size; i=i+size {
-        chunks = append(chunks, data[i:i+size])
-    }
-
-    chunks = append(chunks, data[len(data)-size:])
-
-    return chunks
-}
-
-
 
 func main() {
     fmt.Println("Cryptopals Set 1")
