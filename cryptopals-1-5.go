@@ -13,19 +13,10 @@ $ go run cryptopals-1-5.go
 package main
 
 import (
-    "os"
     "fmt"
 )
 
 import ca "github.com/averagesecurityguy/cryptanalysis"
-
-
-func check(e error) {
-	if e != nil {
-		fmt.Printf("Error: %s\n", e.Error())
-		os.Exit(0)
-	}
-}
 
 
 func main() {
