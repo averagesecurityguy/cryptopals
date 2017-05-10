@@ -25,7 +25,7 @@ func main() {
     fmt.Println("-----------")
     b1 := ca.DecodeHexStr("1c0111001f010100061a024b53535009181c")
     b2 := ca.DecodeHexStr("686974207468652062756c6c277320657965")
-    str := ca.EncodeHexStr(ca.XOR(b1, b2))
+    str := ca.EncodeHexStr(ca.XorArrays(b1, b2))
 
     fmt.Println(str)
 }

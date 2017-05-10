@@ -53,26 +53,21 @@ func main() {
 
     block_size := 16
     crypts := get_data("data/8.txt")
-    low := len(crypts[0]) / block_size
-    msg := ""
+    low := float64(len(crypts[0])) / float64(block_size)
+    var msg []byte
 
     for _, crypt := range crypts {
-        chunks := ca.Chunk(crypt, block_size)
-        temp := make(map[string] int)
-
-        for _, c := range chunks {
-            temp[string(c)] = 0
-        }
+        score := ca.ScoreEcb(crypt, block_size)
 
         // Assume that the crypt with the least unique chunks is our ecb
         // encrypted data.
-        if len(temp) < low {
-            low = len(temp)
-            msg = string(crypt)
+        if score < low {
+            low = score
+            msg = crypt
         }
     }
 
-    for _, c := range ca.Chunk([]byte(msg), 16) {
+    for _, c := range ca.Chunk(msg, 16) {
         fmt.Printf("%x\n", c)
     }
 }

@@ -53,6 +53,7 @@ func main() {
     fmt.Println("-----------")
 
     crypt := get_data("data/6.txt")
+    crypt = ca.PadPkcs7(crypt, 16)
     size, err := ca.KeyLength(crypt)
     check(err)
 

@@ -17,7 +17,6 @@ import (
     "fmt"
     "bufio"
     "bytes"
-    "crypto/aes"
 )
 
 import ca "github.com/averagesecurityguy/cryptanalysis"
@@ -52,22 +51,9 @@ func main() {
     fmt.Println("Challenge 7")
     fmt.Println("-----------")
 
-    block_size := 16
-    ecb, err := aes.NewCipher([]byte("YELLOW SUBMARINE"))
-    check(err)
-
+    key := []byte("YELLOW SUBMARINE")
     ciphertext := get_data("data/7.txt")
-    plaintext := make([]byte, 0)
-    chunks := ca.Chunk(ciphertext, block_size)
-
-    for _, chunk := range chunks {
-        chunk = ca.PadPkcs7(chunk, block_size)
-        temp := make([]byte, block_size)
-
-        ecb.Decrypt(temp, chunk)
-
-        plaintext = append(plaintext, temp...)
-    }
+    plaintext, _ := ca.DecryptEcb(ciphertext, key)
 
     fmt.Println(string(plaintext))
 }
