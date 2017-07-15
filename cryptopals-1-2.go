@@ -13,19 +13,21 @@ $ go run cryptopals-1-2.go
 package main
 
 import (
-    "fmt"
+	"fmt"
 )
 
 import ca "github.com/averagesecurityguy/cryptanalysis"
 
-
 func main() {
-    fmt.Println()
-    fmt.Println("Challenge 2")
-    fmt.Println("-----------")
-    b1 := ca.DecodeHexStr("1c0111001f010100061a024b53535009181c")
-    b2 := ca.DecodeHexStr("686974207468652062756c6c277320657965")
-    str := ca.EncodeHexStr(ca.XorArrays(b1, b2))
+	fmt.Println()
+	fmt.Println("Challenge 2")
+	fmt.Println("-----------")
+	b1 := ca.DecodeHexStr("1c0111001f010100061a024b53535009181c")
+	b2 := ca.DecodeHexStr("686974207468652062756c6c277320657965")
 
-    fmt.Println(str)
+	x, err := ca.XorArrays(b1, b2)
+	if err == nil {
+		str := ca.EncodeHexStr(x)
+		fmt.Println(str)
+	}
 }
